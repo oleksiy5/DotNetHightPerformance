@@ -15,10 +15,10 @@ namespace Performance
             for (int ii = 0; ii < 5; ii++)
             {
                 int count = 90000000;
-
+                Random rn = new Random();
                 int[] arr = new int[count];
                 for (int i = 0; i < count; ++i)
-                    arr[i] = i + 1;
+                    arr[i] = i * rn.Next(0,5);
                 //arr = arr.Reverse().ToArray();
 
                 var sw = new Stopwatch();
@@ -26,21 +26,21 @@ namespace Performance
 
                 //int maxValue = arr.Max<int>();
                 //Console.WriteLine(maxValue);
-                ArrayReader ar2 = new ArrayReader(arr);
-                ar2.FindMaxValue();
+                ReaderIntArr ar2 = new ReaderIntArr(arr);
+                Console.WriteLine(ar2.FindMaxValue());
 
                 sw.Stop();
                 Console.WriteLine("safe ms " + sw.ElapsedMilliseconds);
 
-                for (int i = 0; i < count; ++i)
-                    arr[i] = i + 1;
+                //for (int i = 0; i < count; ++i)
+                //    arr[i] = i + 1;
                 //arr = arr.Reverse().ToArray();
 
                 var sw2 = new Stopwatch();
                 sw2.Start();
 
-                ArrayReader ar = new ArrayReader(arr);
-                ar.FindMaxValueThread(4);
+                ReaderIntArr ar = new ReaderIntArr(arr);
+                Console.WriteLine(ar.FindMaxValue(10));
 
                 sw2.Stop();
                 Console.WriteLine("unsafe ms " + sw2.ElapsedMilliseconds);

@@ -12,12 +12,12 @@ namespace Performance
        
     }
 
-    unsafe class ArrayReader
+    unsafe class ReaderIntArr
     {
         int[] _arr;
         int _count;
 
-        public ArrayReader(int[] arr)
+        public ReaderIntArr(int[] arr)
         {
             _arr = arr;
             _count = _arr.Length;
@@ -37,7 +37,7 @@ namespace Performance
             }
         }
 
-        public void FindMaxValue()
+        public int FindMaxValue()
         {
             fixed (int* p = &_arr[0])
             {
@@ -47,24 +47,23 @@ namespace Performance
                     int val = *pCur;
                     if (val > maxValue)
                         maxValue = val;
-                    //*pCur = val;
                 }
-                Console.WriteLine(maxValue);
+                return maxValue;
             }
         }
 
-        public void FindMaxValueThread(int taskCount)
+        public int FindMaxValue(int taskCount)
         {
-            int[] resultsMax = new int[taskCount];
+            int[] results = new int[taskCount];
             List<Task> tasks = new List<Task>();
             int i = 0;
             do
             {
-                int taskNumber = i;
+                int taskIndex = i;
                 Task t1 = new Task(() =>
                     {
                         int indexCount = _count / taskCount;
-                        int indexStart = indexCount * taskNumber;
+                        int indexStart = indexCount * taskIndex;
 
                         fixed (int* p = &_arr[indexStart])
                         {
@@ -75,7 +74,7 @@ namespace Performance
                                 if (val > maxValue)
                                     maxValue = val;
                             }
-                            resultsMax[taskNumber] = maxValue;
+                            results[taskIndex] = maxValue;
                         }
                     }
                     );
@@ -85,57 +84,17 @@ namespace Performance
             }
             while (i < taskCount);
 
-            //Task t1 = new Task(() =>
-            //    {
-            //        int indexCount = _count / taskCount;
-            //        int indexStart = 0;
-
-            //        fixed (int* p = &_arr[indexStart])
-            //        {
-            //            int maxValue = 0;
-            //            for (int* pCur = p, pEnd = p + indexCount; pCur < pEnd; ++pCur)
-            //            {
-            //                int val = *pCur;
-            //                if (val > maxValue)
-            //                    maxValue = val;
-            //            }
-            //            resultsMax[0] = maxValue;
-            //        }
-            //    }
-            //    );
-            //tasks.Add(t1);
-            //t1.Start();
-
-            //Task t2 = new Task(() =>
-            //{
-            //    int indexCount = _count / taskCount;
-            //    int indexStart = indexCount * 1;
-
-            //    fixed (int* p = &_arr[indexStart])
-            //    {
-            //        int maxValue = 0;
-            //        for (int* pCur = p, pEnd = p + indexCount; pCur < pEnd; ++pCur)
-            //        {
-            //            int val = *pCur;
-            //            if (val > maxValue)
-            //                maxValue = val;
-            //        }
-            //        resultsMax[1] = maxValue;
-            //    }
-            //});
-            //tasks.Add(t2);
-            //t2.Start();
-
             Task.WaitAll(tasks.ToArray());
-            int resultLength = resultsMax.Length;
-            int maxResult = 0;
-            for (int ndx = 0; ndx < resultLength; ndx++) 
+
+            int length = results.Length;
+            int result = 0;
+            for (int ndx = 0; ndx < length; ndx++) 
             {
-                if (maxResult < resultsMax[ndx])
-                    maxResult = resultsMax[ndx];                
+                if (result < results[ndx])
+                    result = results[ndx];                
             }
 
-            Console.WriteLine(maxResult);
+            return result;
         }
     }
 }
