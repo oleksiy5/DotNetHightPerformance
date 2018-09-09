@@ -62,13 +62,13 @@ namespace Performance
                 int taskIndex = i;
                 Task t1 = new Task(() =>
                     {
-                        int indexCount = _count / taskCount;
-                        int indexStart = indexCount * taskIndex;
+                        int endCount = _count / taskCount;
+                        int startPosition = endCount * taskIndex;
 
-                        fixed (int* p = &_arr[indexStart])
+                        fixed (int* p = &_arr[startPosition])
                         {
                             int maxValue = 0;
-                            for (int* pCur = p, pEnd = p + indexCount; pCur < pEnd; ++pCur)
+                            for (int* pCur = p, pEnd = p + endCount; pCur < pEnd; ++pCur)
                             {
                                 int val = *pCur;
                                 if (val > maxValue)
