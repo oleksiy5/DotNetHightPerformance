@@ -14,7 +14,7 @@ namespace Performance
         {
             for (int ii = 0; ii < 5; ii++)
             {
-                int count = 90000000;
+                int count = 50*1000*1000;
                 Random rn = new Random();
                 int[] arr = new int[count];
                 for (int i = 0; i < count; ++i)

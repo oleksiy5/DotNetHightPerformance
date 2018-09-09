@@ -21,6 +21,8 @@ namespace Performance
         {
             _arr = arr;
             _count = _arr.Length;
+            if (_count == 0)
+                throw new Exception("arr can't be without items");
         }
 
         public void FindByValue(int value)
@@ -32,7 +34,6 @@ namespace Performance
                     int val = *pCur;
                     if (val == value)
                         Console.WriteLine(val);
-                    //*pCur = val;
                 }
             }
         }
@@ -60,7 +61,7 @@ namespace Performance
             do
             {
                 int taskIndex = i;
-                Task t1 = new Task(() =>
+                Task task = new Task(() =>
                     {
                         int endCount = _count / taskCount;
                         int startPosition = endCount * taskIndex;
@@ -78,15 +79,15 @@ namespace Performance
                         }
                     }
                     );
-                tasks.Add(t1);
-                t1.Start();
+                tasks.Add(task);
+                task.Start();
                 i++;
             }
             while (i < taskCount);
 
-            Task.WaitAll(tasks.ToArray());
-
-            int length = results.Length;
+            Task.WaitAll(tasks.ToArray());            
+            
+            int length = results.Length;            
             int result = 0;
             for (int ndx = 0; ndx < length; ndx++) 
             {
