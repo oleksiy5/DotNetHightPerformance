@@ -12,43 +12,45 @@ namespace Performance
     {
         static void Main(string[] args)
         {
+            for (int ii = 0; ii < 5; ii++)
+            {
+                int count = 90000000;
 
-            int count = 90000000;
+                int[] arr = new int[count];
+                for (int i = 0; i < count; ++i)
+                    arr[i] = i + 1;
+                //arr = arr.Reverse().ToArray();
 
-            int[] arr = new int[count];
-            for (int i = 0; i < count; ++i)
-                arr[i] = i + 1;
-            arr = arr.Reverse().ToArray();
+                var sw = new Stopwatch();
+                sw.Start();
 
-            var sw = new Stopwatch();
-            sw.Start();
+                //int maxValue = arr.Max<int>();
+                //Console.WriteLine(maxValue);
+                ArrayReader ar2 = new ArrayReader(arr);
+                ar2.FindMaxValue();
 
-            //int maxValue = arr.Max<int>();
-            //Console.WriteLine(maxValue);
-            ArrayReader ar2 = new ArrayReader(arr);
-            ar2.FindMaxValue();
+                sw.Stop();
+                Console.WriteLine("safe ms " + sw.ElapsedMilliseconds);
 
-            sw.Stop();
-            Console.WriteLine("safe ms " + sw.ElapsedMilliseconds);
+                for (int i = 0; i < count; ++i)
+                    arr[i] = i + 1;
+                //arr = arr.Reverse().ToArray();
 
-            for (int i = 0; i < count; ++i)
-                arr[i] = i + 1;
-            arr = arr.Reverse().ToArray();
+                var sw2 = new Stopwatch();
+                sw2.Start();
 
-            var sw2 = new Stopwatch();
-            sw2.Start();
+                ArrayReader ar = new ArrayReader(arr);
+                ar.FindMaxValueThread(4);
 
-            ArrayReader ar = new ArrayReader(arr);
-            ar.FindMaxValueThread(2);
+                sw2.Stop();
+                Console.WriteLine("unsafe ms " + sw2.ElapsedMilliseconds);
 
-            sw2.Stop();
-            Console.WriteLine("unsafe ms " + sw2.ElapsedMilliseconds);
+                //var test = new TestSafeVsUnsafeArray();
+                //test.Test1();
+                //test.Test2();
 
-            //var test = new TestSafeVsUnsafeArray();
-            //test.Test1();
-            //test.Test2();
-
-            Console.ReadLine();
+                Console.ReadLine();
+            }
         }
     }
 
