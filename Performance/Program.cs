@@ -14,36 +14,44 @@ namespace Performance
         {
             for (int ii = 0; ii < 5; ii++)
             {
+                Console.WriteLine($"--Performance-- test_{ii}");
+
                 int count = 50*1000*1000;
                 Random rn = new Random();
                 int[] arr = new int[count];
                 for (int i = 0; i < count; ++i)
                     arr[i] = i * rn.Next(0,5);
-                //arr = arr.Reverse().ToArray();
 
                 var sw = new Stopwatch();
                 sw.Start();
 
-                //int maxValue = arr.Max<int>();
-                //Console.WriteLine(maxValue);
-                ReaderIntArr ar2 = new ReaderIntArr(arr);
-                Console.WriteLine(ar2.FindMaxValue());
+                int maxValue = arr.Max<int>();
 
                 sw.Stop();
-                Console.WriteLine("safe ms " + sw.ElapsedMilliseconds);
+                Console.WriteLine($"LINQ Max(): {sw.ElapsedMilliseconds}ms");
+                Console.WriteLine($"Search result: {maxValue}");
+                Console.WriteLine($"----------------------------");
 
-                //for (int i = 0; i < count; ++i)
-                //    arr[i] = i + 1;
-                //arr = arr.Reverse().ToArray();
+
+                //Console.WriteLine($"Loop FOR: {sw.ElapsedMilliseconds}ms");
+                //Console.WriteLine($"Search result: {maxValue}");
+                //Console.WriteLine($"----------------------------");
+
 
                 var sw2 = new Stopwatch();
                 sw2.Start();
 
                 ReaderIntArr ar = new ReaderIntArr(arr);
-                Console.WriteLine(ar.FindMaxValue(10));
+                int maxValue2 = ar.FindMaxValue();
 
                 sw2.Stop();
-                Console.WriteLine("unsafe ms " + sw2.ElapsedMilliseconds);
+                Console.WriteLine($"UNSAFE: {sw2.ElapsedMilliseconds}ms");
+                Console.WriteLine($"Search result: {maxValue2}");
+                Console.WriteLine($"----------------------------");
+
+                //Console.WriteLine($"UNSAFE+TASK: {sw.ElapsedMilliseconds}ms");
+                //Console.WriteLine($"Search result: {maxValue}");
+                //Console.WriteLine($"----------------------------");
 
                 //var test = new TestSafeVsUnsafeArray();
                 //test.Test1();
