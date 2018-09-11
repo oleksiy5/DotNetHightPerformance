@@ -68,7 +68,7 @@ namespace Performance
 
                         fixed (int* p = &_arr[startPosition])
                         {
-                            int maxValue = 0;
+                            int maxValue = int.MinValue;
                             for (int* pCur = p, pEnd = p + endCount; pCur < pEnd; ++pCur)
                             {
                                 if (*pCur > maxValue)
