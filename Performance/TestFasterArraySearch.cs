@@ -58,12 +58,12 @@ namespace Performance
             int[] results = new int[taskCount];
             List<Task> tasks = new List<Task>();
             int i = 0;
+            int endCount = _count / taskCount;
             do
             {
                 int taskIndex = i;
                 Task task = new Task(() =>
                     {
-                        int endCount = _count / taskCount;
                         int startPosition = endCount * taskIndex;
 
                         fixed (int* p = &_arr[startPosition])
@@ -71,9 +71,8 @@ namespace Performance
                             int maxValue = 0;
                             for (int* pCur = p, pEnd = p + endCount; pCur < pEnd; ++pCur)
                             {
-                                int val = *pCur;
-                                if (val > maxValue)
-                                    maxValue = val;
+                                if (*pCur > maxValue)
+                                    maxValue = *pCur;
                             }
                             results[taskIndex] = maxValue;
                         }
