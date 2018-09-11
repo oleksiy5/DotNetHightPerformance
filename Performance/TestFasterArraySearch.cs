@@ -56,7 +56,7 @@ namespace Performance
         public int FindMaxValue(int taskCount)
         {
             int[] results = new int[taskCount];
-            List<Task> tasks = new List<Task>();
+            List<Task> tasks = new List<Task>(taskCount);
             int i = 0;
             int endCount = _count / taskCount;
             do
