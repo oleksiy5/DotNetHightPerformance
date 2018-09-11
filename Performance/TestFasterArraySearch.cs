@@ -38,11 +38,23 @@ namespace Performance
             }
         }
 
+        public int FindMaxValue_For()
+        {
+            int maxValue = int.MinValue;
+            for (int i=0;i<_count;i++)
+            {
+                int val = _arr[i];
+                if (val > maxValue)
+                    maxValue = val;
+            }
+            return maxValue;
+        }
+
         public int FindMaxValue()
         {
             fixed (int* p = &_arr[0])
             {
-                int maxValue = 0;
+                int maxValue = int.MinValue;
                 for (int* pCur = p, pEnd = p + _count; pCur < pEnd; ++pCur)
                 {
                     int val = *pCur;

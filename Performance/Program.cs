@@ -33,21 +33,29 @@ namespace Performance
                 Console.WriteLine($"----------------------------");
 
 
-                //Console.WriteLine($"Loop FOR: {sw.ElapsedMilliseconds}ms");
-                //Console.WriteLine($"Search result: {maxValue}");
-                //Console.WriteLine($"----------------------------");
-
-
                 var sw2 = new Stopwatch();
                 sw2.Start();
 
                 ReaderIntArr ar = new ReaderIntArr(arr);
                 int maxValue2 = ar.FindMaxValue();
 
+
                 sw2.Stop();
-                Console.WriteLine($"UNSAFE: {sw2.ElapsedMilliseconds}ms");
+                Console.WriteLine($"Loop FOR: {sw2.ElapsedMilliseconds}ms");
                 Console.WriteLine($"Search result: {maxValue2}");
                 Console.WriteLine($"----------------------------");
+
+
+                //var sw2 = new Stopwatch();
+                //sw2.Start();
+
+                //ReaderIntArr ar = new ReaderIntArr(arr);
+                //int maxValue2 = ar.FindMaxValue();
+
+                //sw2.Stop();
+                //Console.WriteLine($"UNSAFE: {sw2.ElapsedMilliseconds}ms");
+                //Console.WriteLine($"Search result: {maxValue2}");
+                //Console.WriteLine($"----------------------------");
 
                 //Console.WriteLine($"UNSAFE+TASK: {sw.ElapsedMilliseconds}ms");
                 //Console.WriteLine($"Search result: {maxValue}");
