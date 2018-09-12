@@ -67,17 +67,22 @@ namespace Performance
 
         public int FindMaxValue(int taskCount)
         {
+            if (taskCount > _count)
+                taskCount = 1;
+
             int[] results = new int[taskCount];
             List<Task> tasks = new List<Task>(taskCount);
             int i = 0;
-            int endCount = _count / taskCount;
+            int restCount = _count % taskCount;
+            int endCount = (_count - restCount) / taskCount;
             do
             {
                 int taskIndex = i;
                 Task task = new Task(() =>
                     {
                         int startPosition = endCount * taskIndex;
-
+                        if ((taskIndex + 1) == taskCount)
+                            endCount = endCount + restCount;
                         fixed (int* p = &_arr[startPosition])
                         {
                             int maxValue = int.MinValue;

@@ -16,11 +16,12 @@ namespace Performance
             {
                 Console.WriteLine($"--Performance-- test_{ii}");
 
-                int count = 50*1000*1000;
+                int count = 100000021
+                    ;
                 Random rn = new Random();
                 int[] arr = new int[count];
                 for (int i = 0; i < count; ++i)
-                    arr[i] = i * rn.Next(0,5);
+                    arr[i] = i;// * rn.Next(0,5);
 
                 var sw = new Stopwatch();
                 sw.Start();
@@ -37,7 +38,7 @@ namespace Performance
                 sw2.Start();
 
                 ReaderIntArr ar = new ReaderIntArr(arr);
-                int maxValue2 = ar.FindMaxValue();
+                int maxValue2 = ar.FindMaxValue(5);
 
 
                 sw2.Stop();
@@ -46,20 +47,28 @@ namespace Performance
                 Console.WriteLine($"----------------------------");
 
 
-                //var sw2 = new Stopwatch();
-                //sw2.Start();
+                var sw3 = new Stopwatch();
+                sw3.Start();
 
-                //ReaderIntArr ar = new ReaderIntArr(arr);
-                //int maxValue2 = ar.FindMaxValue();
+                ReaderIntArr ar3 = new ReaderIntArr(arr);
+                int maxValue3 = ar3.FindMaxValue();
 
-                //sw2.Stop();
-                //Console.WriteLine($"UNSAFE: {sw2.ElapsedMilliseconds}ms");
-                //Console.WriteLine($"Search result: {maxValue2}");
-                //Console.WriteLine($"----------------------------");
+                sw3.Stop();
+                Console.WriteLine($"UNSAFE: {sw3.ElapsedMilliseconds}ms");
+                Console.WriteLine($"Search result: {maxValue3}");
+                Console.WriteLine($"----------------------------");
 
-                //Console.WriteLine($"UNSAFE+TASK: {sw.ElapsedMilliseconds}ms");
-                //Console.WriteLine($"Search result: {maxValue}");
-                //Console.WriteLine($"----------------------------");
+
+                var sw4 = new Stopwatch();
+                sw4.Start();
+
+                ReaderIntArr ar4 = new ReaderIntArr(arr);
+                int maxValue4 = ar4.FindMaxValue(5);
+
+                sw4.Stop();
+                Console.WriteLine($"UNSAFE+TASK: {sw4.ElapsedMilliseconds}ms");
+                Console.WriteLine($"Search result: {maxValue4}");
+                Console.WriteLine($"----------------------------");
 
                 //var test = new TestSafeVsUnsafeArray();
                 //test.Test1();
