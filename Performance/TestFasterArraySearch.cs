@@ -9,7 +9,61 @@ namespace Performance
 {
     class TestFasterArraySearch
     {
-       
+        public void Test_LINQ(int[] arr)
+        {
+            var sw = new Stopwatch();
+            sw.Start();
+
+            int maxValue = arr.Max<int>();
+
+            sw.Stop();
+            Console.WriteLine($"LINQ Max(): {sw.ElapsedMilliseconds}ms");
+            Console.WriteLine($"Search result: {maxValue}");
+            Console.WriteLine($"----------------------------");
+        }
+
+        public void Test_FOR(int[] arr)
+        {
+            var sw = new Stopwatch();
+            sw.Start();
+
+            ReaderIntArr ar = new ReaderIntArr(arr);
+            int maxValue = ar.FindMaxValue_For();
+            
+            sw.Stop();
+            Console.WriteLine($"Loop FOR: {sw.ElapsedMilliseconds}ms");
+            Console.WriteLine($"Search result: {maxValue}");
+            Console.WriteLine($"----------------------------");
+        }
+
+        public void Test_UNSAFE(int[] arr)
+        {
+            var sw = new Stopwatch();
+            sw.Start();
+
+            ReaderIntArr ar = new ReaderIntArr(arr);
+            int maxValue = ar.FindMaxValue();
+
+            sw.Stop();
+            Console.WriteLine($"UNSAFE: {sw.ElapsedMilliseconds}ms");
+            Console.WriteLine($"Search result: {maxValue}");
+            Console.WriteLine($"----------------------------");
+
+        }
+
+        public void Test_UNSAFE_TASK(int[] arr)
+        {
+            var sw = new Stopwatch();
+            sw.Start();
+
+            ReaderIntArr ar = new ReaderIntArr(arr);
+            int maxValue = ar.FindMaxValue(5);
+
+            sw.Stop();
+            Console.WriteLine($"UNSAFE+TASK: {sw.ElapsedMilliseconds}ms");
+            Console.WriteLine($"Search result: {maxValue}");
+            Console.WriteLine($"----------------------------");
+        }
     }
 
     unsafe class ReaderIntArr
