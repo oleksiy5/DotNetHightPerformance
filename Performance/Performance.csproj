@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TestDivision.cs" />
     <Compile Include="TestFasterArraySearch.cs" />
     <Compile Include="TestSafeVsUnsafeArray.cs" />
     <Compile Include="TestCommonObjectTypes.cs" />
