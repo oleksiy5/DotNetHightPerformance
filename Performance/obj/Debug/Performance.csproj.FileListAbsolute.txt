@@ -8,7 +8,6 @@ C:\Users\Oleksiy\Desktop\Olo How [.NET]\code\Performance\Performance\obj\Debug\P
 C:\Users\Oleksiy\Desktop\OloHow\code\Performance\Performance\bin\Debug\Performance.exe.config
 C:\Users\Oleksiy\Desktop\OloHow\code\Performance\Performance\bin\Debug\Performance.exe
 C:\Users\Oleksiy\Desktop\OloHow\code\Performance\Performance\bin\Debug\Performance.pdb
-C:\Users\Oleksiy\Desktop\OloHow\code\Performance\Performance\obj\Debug\Performance.csprojResolveAssemblyReference.cache
 C:\Users\Oleksiy\Desktop\OloHow\code\Performance\Performance\obj\Debug\Performance.csproj.CoreCompileInputs.cache
 C:\Users\Oleksiy\Desktop\OloHow\code\Performance\Performance\obj\Debug\Performance.exe
 C:\Users\Oleksiy\Desktop\OloHow\code\Performance\Performance\obj\Debug\Performance.pdb

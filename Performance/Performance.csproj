@@ -44,9 +44,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TestDivision.cs" />
+    <Compile Include="TestDoubleNotation.cs" />
     <Compile Include="TestFasterArraySearch.cs" />
+    <Compile Include="TestOverridingEquals.cs" />
+    <Compile Include="TestReflection.cs" />
     <Compile Include="TestSafeVsUnsafeArray.cs" />
     <Compile Include="TestCommonObjectTypes.cs" />
+    <Compile Include="TestStringManipulation.cs" />
     <Compile Include="TestTaskvsThread.cs" />
     <Compile Include="TestReadValue.cs" />
     <Compile Include="TestAsVsCast.cs" />

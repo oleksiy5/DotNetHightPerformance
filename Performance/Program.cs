@@ -12,7 +12,7 @@ namespace Performance
     {
         static void Main(string[] args)
         {
-            TestDivision t = new TestDivision();
+            TestDoubleNotation t = new TestDoubleNotation();
             t.Test1();
             t.Test2();
         }
